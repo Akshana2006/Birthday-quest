@@ -2,6 +2,9 @@
 
 An interactive pixel-art birthday website built with React and CSS.
 
+<img width="1470" height="832" alt="image" src="https://github.com/user-attachments/assets/63e3a4f8-812a-4d31-9030-98e4f0e1b495" />
+
+
 ## Run locally
 
 1. Install Node.js 18 or later.
