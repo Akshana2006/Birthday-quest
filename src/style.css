@@ -1,0 +1,1951 @@
+/*
+ * AATHI'S BIRTHDAY QUEST — ORGANIZED STYLESHEET
+ * ------------------------------------------------------------
+ * Rules are kept in their original cascade order so existing
+ * desktop/iPhone layouts, animations, and overrides remain intact.
+ * Some earlier selectors are intentionally retained because we
+ * have not verified every component's current JSX usage.
+ *
+ * Sections are numbered for easier navigation and future edits.
+ */
+
+/* ==================================================================
+   01  GLOBAL STYLES & PAGE LAYOUT
+   ================================================================== */
+:root {
+  font-family: "Nunito", sans-serif;
+  color: #fff8fa;
+  background: #211b3e;
+  font-synthesis: none;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button {
+  cursor: pointer;
+  font: inherit;
+}
+button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+.world {
+  min-height: 100vh;
+  padding: 25px 16px;
+  background: radial-gradient(ellipse at 50% 0, #52447e 0%, #211b3e 75%);
+  position: relative;
+  overflow: hidden;
+}
+.stars {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  width: 100%;
+  font-size: 26px;
+  letter-spacing: 30px;
+  color: #ffe6a2;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.top,
+.game,
+footer {
+  max-width: 850px;
+  margin: auto;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font: 9px "Press Start 2P";
+  color: #ffe7a4;
+  padding: 14px 0 24px;
+}
+.game {
+  border: 6px solid #f8c7e5;
+  box-shadow:
+    0 0 0 6px #5a3b76,
+    0 20px 0 #130e27,
+    0 25px 45px #0c092288;
+  background: #3c2d66;
+  position: relative;
+}
+.hud,
+.footer-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 17px 22px;
+  font: 9px "Press Start 2P";
+  color: #fff0b8;
+}
+.scene {
+  position: relative;
+  min-height: 525px;
+  overflow: hidden;
+  background: linear-gradient(#8f85d2 0%, #e7a8d3 68%, #ffc7c9 100%);
+}
+.sun {
+  position: absolute;
+  width: 95px;
+  height: 95px;
+  background: #ffe9a6;
+  border-radius: 50%;
+  top: 46px;
+  right: 12%;
+  box-shadow: 0 0 45px #ffefc6;
+}
+.cloud {
+  position: absolute;
+  font-size: 85px;
+  color: #f8e6f7;
+  opacity: 0.8;
+}
+.cloud-a {
+  top: 30px;
+  left: 7%;
+}
+.cloud-b {
+  top: 125px;
+  right: 5%;
+  font-size: 65px;
+}
+.hills {
+  position: absolute;
+  bottom: 46px;
+  width: 100%;
+  height: 155px;
+  background: #a5a4d3;
+  clip-path: polygon(
+    0 85%,
+    15% 25%,
+    30% 75%,
+    48% 10%,
+    67% 80%,
+    84% 20%,
+    100% 75%,
+    100% 100%,
+    0 100%
+  );
+}
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background: #78b6a4;
+  border-top: 12px solid #a6d5b2;
+}
+.flowers {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 10px;
+}
+.scene-content {
+  position: relative;
+  z-index: 2;
+  min-height: 525px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 35px 24px;
+}
+.scene-content section {
+  width: 100%;
+  max-width: 620px;
+  background: #33274bdc;
+  border: 4px solid #ffe3f2;
+  box-shadow: 8px 8px 0 #4e3a72;
+  padding: 30px 25px;
+}
+.eyebrow,
+.hint {
+  font: 10px "Press Start 2P";
+  color: #ffe69c;
+  line-height: 1.9;
+}
+.hint {
+  margin-top: 24px;
+  color: #f7bbdf;
+}
+h1,
+h2 {
+  font-family: "Press Start 2P";
+  line-height: 1.65;
+  text-shadow: 4px 4px 0 #b65f9c;
+}
+h1 {
+  font-size: clamp(21px, 4vw, 36px);
+  margin: 18px 0;
+}
+h1 span {
+  display: block;
+  font-size: 0.65em;
+  color: #ffe6a2;
+}
+h2 {
+  font-size: clamp(17px, 3vw, 24px);
+  margin: 18px 0;
+}
+p {
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 14px auto;
+  max-width: 480px;
+}
+.floating {
+  font-size: 74px;
+  animation: bob 2.3s ease-in-out infinite;
+}
+.pixel-btn {
+  background: #ff87bc;
+  color: #3b244a;
+  border: 0;
+  box-shadow: 0 6px 0 #b54d86;
+  padding: 17px 22px;
+  margin: 18px 0 8px;
+  font: 11px "Press Start 2P";
+  line-height: 1.6;
+  transition: transform 0.1s;
+}
+.pixel-btn:hover {
+  transform: translateY(-3px);
+  background: #ffa5ce;
+}
+.pixel-btn:active {
+  transform: translateY(5px);
+  box-shadow: 0 1px 0 #b54d86;
+}
+.secondary-btn {
+  display: block;
+  margin: 20px auto 0;
+  border: 2px solid #ffd5eb;
+  color: #ffd5eb;
+  background: transparent;
+  padding: 10px 15px;
+  font: 9px "Press Start 2P";
+}
+
+/* ==================================================================
+   02  HEART COLLECTION, ORIGINAL CAKE & CORE COMPONENTS
+   ================================================================== */
+.heart-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 300px;
+  margin: 22px auto;
+}
+.heart {
+  font-size: 42px;
+  border: 3px solid #ffcee7;
+  background: #674977;
+  padding: 8px;
+  transition: transform 0.2s;
+}
+.heart:hover {
+  transform: scale(1.1);
+}
+.heart.collected {
+  background: #87a99c;
+}
+.meter {
+  height: 18px;
+  background: #251b3e;
+  border: 3px solid #ffe3f2;
+  max-width: 300px;
+  margin: 10px auto;
+}
+.meter div {
+  height: 100%;
+  background: #ff88c3;
+  transition: width 0.25s;
+}
+.cake {
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 15px auto 22px;
+}
+.candles {
+  display: flex;
+  gap: 23px;
+  margin-bottom: 0;
+}
+.candle {
+  border: 0;
+  background: none;
+  font-size: 29px;
+  padding: 0 3px;
+}
+.cake-top {
+  width: 180px;
+  height: 36px;
+  background: #ffe3ed;
+  border-radius: 16px 16px 6px 6px;
+  border: 5px solid #e58fbc;
+}
+.cake-base {
+  width: 200px;
+  height: 95px;
+  background: repeating-linear-gradient(
+    90deg,
+    #f1a0c7 0 20px,
+    #f7b3d1 20px 40px
+  );
+  border: 5px solid #d77dab;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 900;
+  color: #783758;
+}
+.cake-plate {
+  width: 235px;
+  height: 14px;
+  background: #f7e5fb;
+  border-radius: 50%;
+}
+.success {
+  color: #ffe69c;
+  font-weight: 900;
+}
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 25px 0;
+}
+.memory {
+  background: #68517d;
+  color: white;
+  border: 3px solid #f7c8e1;
+  min-height: 160px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  align-items: center;
+  justify-content: center;
+}
+.memory span {
+  font-size: 34px;
+}
+.memory strong {
+  font-size: 14px;
+}
+.memory small {
+  font-size: 12px;
+  line-height: 1.4;
+}
+.letter {
+  text-align: left;
+  background: #fff1e6;
+  color: #5e3d59;
+  padding: 25px;
+  border: 5px solid #e5a7ca;
+  box-shadow: 5px 5px 0 #a65e96;
+  max-height: 320px;
+  overflow: auto;
+}
+.letter h3 {
+  font-size: 21px;
+}
+.letter p {
+  font-size: 16px;
+}
+.footer-bar {
+  color: #f8d0e8;
+}
+footer {
+  text-align: center;
+  font: 9px "Press Start 2P";
+  line-height: 2;
+  color: #c9b5d7;
+  padding: 42px 0 10px;
+}
+.confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+.confetti span {
+  position: absolute;
+  top: -40px;
+  font-size: 28px;
+  animation: fall 4s linear infinite;
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(500deg);
+  }
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-13px);
+  }
+}
+
+/* ==================================================================
+   03  BASE MOBILE STYLES
+   ================================================================== */
+@media (max-width: 600px) {
+  .top {
+    font-size: 7px;
+    line-height: 1.7;
+  }
+  .hud,
+  .footer-bar {
+    font-size: 7px;
+    padding: 13px 9px;
+  }
+  .game {
+    border-width: 4px;
+  }
+  .scene-content {
+    padding: 18px 12px;
+  }
+  .scene-content section {
+    padding: 25px 12px;
+  }
+  .memory-grid {
+    grid-template-columns: 1fr;
+  }
+  .memory {
+    min-height: 90px;
+  }
+  .scene,
+  .scene-content {
+    min-height: 550px;
+  }
+  .flowers {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+  .pixel-btn {
+    font-size: 9px;
+  }
+  .letter {
+    max-height: 260px;
+  }
+}
+
+/* ==================================================================
+   04  PIXEL GARDEN / LEVEL 01
+   ================================================================== */
+/* Playable pixel-art birthday garden */
+.adventure-panel {
+  max-width: 710px !important;
+}
+.playfield {
+  height: 315px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 5px solid #f8d6ed;
+  background: repeating-linear-gradient(
+    0deg,
+    #9ed6a5 0 26px,
+    #9bd1a1 26px 52px
+  );
+  image-rendering: pixelated;
+  box-shadow: inset 0 0 0 5px #6f9e82;
+}
+.garden-path {
+  position: absolute;
+  left: 40%;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  background: #eac9a7;
+  opacity: 0.7;
+}
+.garden-heart {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 23px;
+  filter: drop-shadow(2px 3px #7d4c7a);
+  animation: bob 1.8s infinite;
+}
+.player {
+  position: absolute;
+  transform: translate(-50%, -65%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+  transition:
+    left 0.035s linear,
+    top 0.035s linear;
+}
+.player img {
+  height: 78px;
+  width: 62px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(2px 4px #504261);
+}
+.player span {
+  font: 7px "Press Start 2P";
+  background: #4b326b;
+  padding: 5px;
+  color: #fff3bb;
+  white-space: nowrap;
+}
+.garden-deco {
+  position: absolute;
+  font-size: 26px;
+  pointer-events: none;
+}
+.d1 {
+  left: 2%;
+  bottom: 2%;
+}
+.d2 {
+  right: 3%;
+  top: 3%;
+}
+.d3 {
+  right: 2%;
+  bottom: 4%;
+}
+.quest-counter {
+  font: 11px "Press Start 2P";
+  color: #ffe7aa;
+  margin: 14px;
+}
+.dpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.dpad div {
+  display: flex;
+  gap: 5px;
+}
+.dpad button {
+  border: 3px solid #ffe4ef;
+  background: #8d69a9;
+  color: white;
+  width: 48px;
+  height: 40px;
+  touch-action: manipulation;
+  font-size: 20px;
+}
+.dpad button:active {
+  background: #ff85be;
+}
+.candles {
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 240px;
+}
+.candle {
+  font-size: 18px;
+  padding: 0;
+}
+.scene-content:has(.adventure-panel) {
+  padding: 18px 12px;
+}
+.scene-content:has(.adventure-panel) section {
+  padding: 16px 14px;
+}
+@media (max-width: 600px) {
+  .playfield {
+    height: 265px;
+  }
+  .player img {
+    height: 65px;
+    width: 50px;
+  }
+  .adventure-panel p {
+    font-size: 13px;
+  }
+  .adventure-panel h2 {
+    font-size: 14px;
+  }
+}
+
+/* ==================================================================
+   05  ENCHANTED KINGDOM DETAILS
+   ================================================================== */
+/* ENCHANTED KINGDOM UPGRADE — existing styles */
+.enchanted-panel {
+  max-width: 740px !important;
+}
+.enchanted-field {
+  height: 390px;
+  isolation: isolate;
+  background: repeating-linear-gradient(
+    0deg,
+    #b8a4e9 0 24px,
+    #c4b4ee 24px 48px
+  );
+  border: 6px solid #ffe0fa;
+  box-shadow:
+    inset 0 0 0 5px #917dc3,
+    0 0 26px #f3a7ff55;
+}
+.magic-path {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 37%,
+    #f5d8e6 37%,
+    #f5d8e6 63%,
+    transparent 63%
+  );
+  clip-path: polygon(
+    42% 0,
+    60% 0,
+    57% 40%,
+    67% 72%,
+    57% 100%,
+    36% 100%,
+    43% 65%,
+    39% 35%
+  );
+  opacity: 0.8;
+}
+.magic-pond {
+  position: absolute;
+  left: 8%;
+  top: 44%;
+  width: 19%;
+  height: 19%;
+  display: grid;
+  place-items: center;
+  border: 5px solid #a8f4f5;
+  border-radius: 50%;
+  background: #86cfe5;
+  color: white;
+  box-shadow: 0 0 22px #b6ffff;
+}
+.magic-tree {
+  position: absolute;
+  z-index: 1;
+  font-size: 54px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(3px 5px 0 #81639c);
+  pointer-events: none;
+}
+.magic-mushroom {
+  position: absolute;
+  z-index: 1;
+  font-size: 25px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 8px #ffe6fa);
+  pointer-events: none;
+}
+.magic-sparkle {
+  position: absolute;
+  z-index: 1;
+  font-size: 25px;
+  color: #fff7a6;
+  text-shadow: 0 0 12px #fff4b4;
+  animation: twinkle 1.8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.enchanted-heart {
+  z-index: 3;
+  filter: drop-shadow(0 0 8px #ffecfa);
+}
+.magic-portal {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 42px;
+  filter: drop-shadow(0 0 13px #fff);
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.enchanted-field .player {
+  z-index: 5;
+}
+.enchanted-field .player img.player-avatar {
+  display: block;
+  width: 64px;
+  height: 80px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.enchanted-field .player.facing-left img {
+  transform: scaleX(-1);
+}
+.enchanted-field .player span {
+  font:
+    7px "Press Start 2P",
+    monospace;
+  color: #fff3bb;
+  background: #4b326b;
+  padding: 5px;
+  white-space: nowrap;
+}
+@keyframes twinkle {
+  to {
+    opacity: 0.3;
+    transform: scale(0.7) rotate(25deg);
+  }
+}
+@media (max-width: 600px) {
+  .enchanted-field {
+    height: 300px;
+  }
+  .magic-tree {
+    font-size: 37px;
+  }
+  .enchanted-field .player img.player-avatar {
+    width: 48px;
+    height: 65px;
+  }
+}
+
+/* ==================================================================
+   06  IPHONE CONTROLS & MUSIC TOGGLE
+   ================================================================== */
+/* iPhone portrait and touch controls */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  overflow-x: hidden;
+}
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+.dpad button {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+@media (max-width: 600px) {
+  .world {
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .playfield {
+    height: min(48dvh, 390px);
+    min-height: 260px;
+  }
+  .dpad button {
+    min-width: 62px;
+    min-height: 56px;
+    font-size: 23px;
+  }
+  .player img.player-avatar {
+    width: 52px;
+    height: 68px;
+  }
+  .pixel-btn,
+  .secondary-btn {
+    min-height: 48px;
+  }
+}
+
+/* Keep character sprites crisp */
+.player-avatar {
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
+/* Prevent iPhone gestures from interrupting movement */
+.dpad button {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Birthday music toggle */
+.music-toggle {
+  position: fixed;
+  top: calc(12px + env(safe-area-inset-top));
+  right: calc(12px + env(safe-area-inset-right));
+  z-index: 9999;
+
+  width: 48px;
+  height: 48px;
+  border: 2px solid #d98fca;
+  border-radius: 14px;
+
+  background: #ffe6f5;
+  color: #963c83;
+  font-size: 23px;
+
+  box-shadow: 0 4px 0 #c780b8;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.music-toggle:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #c780b8;
+}
+
+/* iPhone music button positioning */
+@media (max-width: 600px) {
+  .music-toggle {
+    top: auto;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    right: calc(15px + env(safe-area-inset-right));
+
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    z-index: 9999;
+  }
+}
+
+/* ==================================================================
+   07  MEMORY CHEST / LEVEL 03
+   ================================================================== */
+/* Memory chest photo reveal */
+.memory-photo {
+  display: block;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid #f4b8df;
+  margin-bottom: 12px;
+}
+
+.memory-open {
+  background: #fff0fa;
+  border-color: #e6a1d4;
+}
+
+.memory-gift {
+  display: block;
+  font-size: 42px;
+  margin: 20px 0;
+}
+
+@media (max-width: 600px) {
+  .memory-photo {
+    height: 180px;
+  }
+}
+
+/* Pastel Polaroid scrapbook cards */
+.polaroid {
+  background: #fffdf9;
+  padding: 10px 10px 18px;
+  border: 1px solid #f1dce9;
+  box-shadow: 0 5px 15px rgba(115, 72, 108, 0.15);
+  transform: rotate(-2deg);
+  width: 100%;
+  max-width: 230px;
+  margin: 8px auto 15px;
+  transition: transform 0.25s ease;
+}
+
+.memory:nth-child(2) .polaroid {
+  transform: rotate(3deg);
+}
+
+.memory:nth-child(3) .polaroid {
+  transform: rotate(-3deg);
+}
+
+.memory-open:hover .polaroid {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.polaroid .memory-photo {
+  display: block;
+  width: 100%;
+  height: 155px;
+  object-fit: cover;
+  border: none;
+  border-radius: 2px;
+  margin: 0;
+}
+
+.polaroid-caption {
+  display: block;
+  margin-top: 12px;
+  color: #a15b86;
+  font-family: "Comic Sans MS", cursive;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .polaroid {
+    max-width: 250px;
+  }
+
+  .polaroid .memory-photo {
+    height: 190px;
+  }
+}
+
+/* ==========================================
+   LEVEL 03 - SCRAPBOOK MEMORY CHEST
+========================================== */
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 950px;
+  margin: 35px auto 25px;
+}
+
+/* Memory cards */
+
+.memory {
+  position: relative;
+  min-width: 0;
+  padding: 20px 14px 24px;
+
+  background: #fff0f7;
+  border: 3px solid #d98bbb;
+  border-radius: 12px;
+
+  color: #71456d;
+  text-align: center;
+
+  box-shadow: 5px 6px 0 #9a679b;
+
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.memory:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 7px 10px 0 #9a679b;
+}
+
+.memory:active {
+  transform: scale(0.97);
+}
+
+/* Opened memory cards */
+
+.memory-open {
+  background: linear-gradient(160deg, #fff3f9, #fbe4f1);
+}
+
+/* Polaroid frames */
+
+.polaroid {
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto 18px;
+  padding: 12px 12px 16px;
+
+  background: #fffdf9;
+  border: 1px solid #f0d9e5;
+
+  box-shadow: 0 5px 14px rgba(91, 43, 89, 0.15);
+
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+}
+
+.memory:nth-child(2) .polaroid {
+  transform: rotate(2deg);
+}
+
+.memory:nth-child(3) .polaroid {
+  transform: rotate(-2deg);
+}
+
+.memory:hover .polaroid {
+  transform: rotate(0deg) scale(1.03);
+}
+
+/* Photos */
+
+.memory-photo {
+  display: block;
+  width: 100%;
+  height: 180px;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 2px;
+}
+
+/* Handwritten captions */
+
+.polaroid-caption {
+  display: block;
+  margin-top: 12px;
+
+  font-family: "Comic Sans MS", cursive;
+  font-size: clamp(12px, 1.2vw, 16px);
+  line-height: 1.35;
+  font-weight: 600;
+
+  color: #a45687;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+/* Card title */
+
+.memory-open strong {
+  display: block;
+  margin: 10px 0 8px;
+
+  color: #75466d;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Card description */
+
+.memory-open small {
+  display: block;
+
+  color: #89647e;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Gift before opening */
+
+.memory-gift {
+  display: block;
+  font-size: 55px;
+  margin: 35px auto;
+  animation: giftBounce 2s ease-in-out infinite;
+}
+
+@keyframes giftBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Decorative tape */
+
+.memory-open::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+
+  width: 65px;
+  height: 20px;
+
+  background: rgba(255, 184, 211, 0.7);
+  transform: translateX(-50%) rotate(-5deg);
+
+  z-index: 2;
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS
+========================================== */
+
+@media (max-width: 700px) {
+  .memory-grid {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    gap: 24px;
+    margin-top: 25px;
+  }
+
+  .memory {
+    padding: 18px 16px 22px;
+  }
+
+  .polaroid {
+    max-width: 240px;
+  }
+
+  .memory-photo {
+    height: 210px;
+  }
+
+  .polaroid-caption {
+    font-size: 15px;
+  }
+
+  .memory-open strong {
+    font-size: 16px;
+  }
+
+  .memory-open small {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory,
+  .polaroid,
+  .memory-gift {
+    animation: none;
+    transition: none;
+  }
+}
+
+.memory-open .polaroid {
+  animation: memoryReveal 0.5s ease-out both;
+}
+
+@keyframes memoryReveal {
+  from {
+    opacity: 0;
+    scale: 0.85;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-open .polaroid {
+    animation: none;
+  }
+}
+
+/* ==================================================================
+   08  WELCOME AVATAR
+   ================================================================== */
+/* Welcome screen avatar */
+
+.welcome-avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px auto 24px;
+  animation: avatarFloat 3s ease-in-out infinite;
+}
+
+.welcome-avatar-container .welcome-avatar {
+  display: block;
+  width: min(100%, 230px);
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 6px 0 #281b42);
+}
+
+@keyframes avatarFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Smaller avatar on phones */
+
+@media (max-width: 600px) {
+  .welcome-avatar-container {
+    margin: 8px auto 16px;
+  }
+
+  .welcome-avatar-container .welcome-avatar {
+    width: min(100%, 180px);
+    max-height: 220px;
+  }
+}
+
+/* ==================================================================
+   09  ORIGINAL CAKE STYLES (LEGACY — RETAINED FOR COMPATIBILITY)
+   ================================================================== */
+/* Aathithya cheering beside her birthday cake */
+
+.cake {
+  position: relative;
+}
+
+.cake-avatar {
+  position: absolute;
+  width: 115px;
+  height: auto;
+
+  right: -105px;
+  bottom: 5px;
+
+  z-index: 6;
+  image-rendering: pixelated;
+
+  animation: avatarCheer 1.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes avatarCheer {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+/* Keep the avatar visible on smaller screens */
+
+@media (max-width: 600px) {
+  .cake-avatar {
+    width: 75px;
+    right: -18px;
+    bottom: 0;
+  }
+}
+
+/* Final birthday cake layout */
+
+.cake {
+  position: relative;
+  width: min(100%, 320px);
+  height: auto;
+  min-height: 220px;
+  margin: 35px auto 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.cake .candles {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  width: 210px;
+  max-width: 100%;
+  gap: 0 2px;
+  justify-items: center;
+  align-items: end;
+  margin-bottom: -8px;
+  position: relative;
+  z-index: 4;
+}
+
+.cake .candle {
+  font-size: 22px;
+  padding: 0;
+  line-height: 1;
+  border: 0;
+  background: transparent;
+}
+
+.cake .cake-avatar {
+  width: 105px;
+  right: -20px;
+  bottom: 5px;
+  z-index: 5;
+}
+
+@media (max-width: 600px) {
+  .cake {
+    width: min(100%, 260px);
+  }
+
+  .cake .cake-avatar {
+    width: 75px;
+    right: -8px;
+    bottom: 0;
+  }
+
+  .cake .candle {
+    font-size: 19px;
+  }
+}
+
+/* Bigger cheering avatar on the LEFT */
+
+.cake .cake-avatar {
+  width: 190px;
+  height: auto;
+
+  left: -155px;
+  right: auto;
+  bottom: 0;
+
+  z-index: 6;
+  pointer-events: none;
+
+  image-rendering: pixelated;
+  animation: avatarCheer 1.4s ease-in-out infinite;
+}
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+  .cake .cake-avatar {
+    width: 115px;
+    left: -48px;
+    right: auto;
+    bottom: 0;
+  }
+}
+
+/* ==================================================================
+   10  INTERACTIVE BIRTHDAY CAKE / LEVEL 02
+   ================================================================== */
+/* ===== BLOW OUT THE CANDLES ===== */
+
+.birthday-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+  margin: 55px auto 20px;
+}
+
+.birthday-character {
+  width: clamp(95px, 24vw, 180px);
+  height: auto;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+  animation: avatarCheer 1.4s ease-in-out infinite;
+}
+
+.birthday-cake {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.birthday-cake .cake-top {
+  width: 180px;
+  height: 36px;
+}
+
+.birthday-cake .cake-base {
+  width: 200px;
+  height: 95px;
+}
+
+.birthday-cake .cake-plate {
+  width: 235px;
+}
+
+/* 14 candles: two rows of seven */
+
+.birthday-candles {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px 3px;
+  width: 175px;
+  justify-items: center;
+  align-items: end;
+  margin-bottom: -5px;
+  position: relative;
+  z-index: 4;
+}
+
+.birthday-candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 22px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.candle-stick {
+  display: block;
+  width: 10px;
+  height: 23px;
+  background: repeating-linear-gradient(135deg, #ffe4f1 0 5px, #f3a1c7 5px 9px);
+  border: 2px solid #8e4b83;
+  border-radius: 2px;
+}
+
+.candle-flame {
+  position: absolute;
+  bottom: 23px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.birthday-candle.is-lit .candle-flame {
+  animation: flameFlicker 0.7s infinite alternate;
+}
+
+.birthday-candle.is-out .candle-flame {
+  opacity: 0;
+  animation: smokePuff 0.7s ease-out;
+}
+
+@keyframes flameFlicker {
+  from {
+    transform: scale(0.9) rotate(-6deg);
+  }
+  to {
+    transform: scale(1.1) rotate(6deg);
+  }
+}
+
+@keyframes smokePuff {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+
+/* iPhone */
+
+@media (max-width: 600px) {
+  .birthday-layout {
+    gap: 0;
+    margin-top: 40px;
+  }
+
+  .birthday-character {
+    width: 105px;
+  }
+
+  .birthday-cake {
+    width: 195px;
+    transform: scale(0.85);
+    transform-origin: bottom center;
+  }
+
+  .birthday-panel h2 {
+    font-size: 17px;
+  }
+
+  .birthday-panel p {
+    font-size: 14px;
+  }
+}
+
+/* ==================================================================
+   11  BIRTHDAY WISH REWARDS
+   ================================================================== */
+/* Birthday wish reward animation */
+
+.birthday-avatar-scene {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(95px, 24vw, 180px);
+}
+
+.birthday-avatar-scene .birthday-character {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.birthday-rewards {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 8;
+}
+
+.reward {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  opacity: 0;
+  animation:
+    rewardPop 0.65s ease-out forwards,
+    rewardFloat 2s ease-in-out 0.7s infinite;
+}
+
+/* Position the rewards around Aathithya */
+
+.reward-hearts {
+  top: -25%;
+  left: -20%;
+  animation-delay: 0s, 0.7s;
+}
+
+.reward-star {
+  top: -35%;
+  right: -10%;
+  animation-delay: 0.15s, 0.85s;
+}
+
+.reward-gift {
+  top: 25%;
+  left: -35%;
+  animation-delay: 0.3s, 1s;
+}
+
+.reward-letter {
+  top: 20%;
+  right: -30%;
+  animation-delay: 0.45s, 1.15s;
+}
+
+.reward-cake {
+  bottom: -15%;
+  right: -10%;
+  animation-delay: 0.6s, 1.3s;
+}
+
+@keyframes rewardPop {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-15deg);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scale(1.3) rotate(8deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes rewardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 600px) {
+  .birthday-avatar-scene {
+    width: 105px;
+  }
+
+  .reward {
+    width: 30px;
+    height: 30px;
+  }
+
+  .reward-hearts {
+    left: -10%;
+  }
+
+  .reward-gift {
+    left: -15%;
+  }
+
+  .reward-letter {
+    right: -15%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reward {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Keep original cake scene visible */
+
+.birthday-layout {
+  position: relative;
+}
+
+/* Extra wish celebration */
+
+.wish-celebration {
+  position: relative;
+  width: 180px;
+  margin: 20px auto;
+  animation: wishAppear 0.6s ease-out both;
+}
+
+.wish-avatar {
+  display: block;
+  width: 150px;
+  height: auto;
+  margin: auto;
+  image-rendering: pixelated;
+}
+
+.wish-celebration .birthday-rewards {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+@keyframes wishAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Avatar and rewards stay beside the cake */
+
+.birthday-avatar-scene {
+  position: relative;
+  width: clamp(95px, 24vw, 180px);
+  flex-shrink: 0;
+}
+
+.birthday-avatar-scene .birthday-character {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.birthday-avatar-scene .birthday-rewards {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.birthday-avatar-scene .reward {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 600px) {
+  .birthday-avatar-scene {
+    width: 105px;
+  }
+
+  .birthday-avatar-scene .reward {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+/* Center the avatar after making a wish */
+
+.birthday-layout.wish-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 360px;
+  margin: 35px auto 20px;
+}
+
+.birthday-layout.wish-mode .birthday-avatar-scene {
+  position: relative;
+  width: 240px;
+  flex-shrink: 0;
+  margin: 0 auto;
+  animation: wishAppear 0.7s ease-out both;
+}
+
+.birthday-layout.wish-mode .birthday-character {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Keep rewards around the centered avatar */
+
+.birthday-layout.wish-mode .birthday-rewards {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.birthday-layout.wish-mode .reward {
+  width: 48px;
+  height: 48px;
+}
+
+/* Spread icons around the avatar */
+
+.birthday-layout.wish-mode .reward-hearts {
+  top: 5%;
+  left: -25%;
+}
+
+.birthday-layout.wish-mode .reward-star {
+  top: -12%;
+  right: -15%;
+}
+
+.birthday-layout.wish-mode .reward-gift {
+  top: 55%;
+  left: -30%;
+}
+
+.birthday-layout.wish-mode .reward-letter {
+  top: 45%;
+  right: -25%;
+}
+
+.birthday-layout.wish-mode .reward-cake {
+  bottom: -12%;
+  right: 10%;
+}
+
+@keyframes wishAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* iPhone */
+
+@media (max-width: 600px) {
+  .birthday-layout.wish-mode {
+    min-height: 270px;
+    margin: 25px auto 15px;
+  }
+
+  .birthday-layout.wish-mode .birthday-avatar-scene {
+    width: 155px;
+  }
+
+  .birthday-layout.wish-mode .reward {
+    width: 32px;
+    height: 32px;
+  }
+
+  .birthday-layout.wish-mode .reward-hearts {
+    left: -15%;
+  }
+
+  .birthday-layout.wish-mode .reward-gift {
+    left: -20%;
+  }
+
+  .birthday-layout.wish-mode .reward-letter {
+    right: -20%;
+  }
+}
+
+/* ==================================================================
+   12  MEMORY CHEST ICONS & MOBILE FINISHING
+   ================================================================== */
+/* Pixel-art gift icons for Memory Chest */
+
+.memory-gift-icon {
+  display: block;
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  margin: 0 auto 20px;
+  transition: transform 0.25s ease;
+}
+
+/* Little bounce when hovering */
+.memory:hover .memory-gift-icon {
+  transform: translateY(-7px) scale(1.08);
+}
+
+/* Smaller icons on iPhone */
+@media (max-width: 600px) {
+  .memory-gift-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 12px;
+  }
+}
+
+.memory-heading-icon {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-left: 12px;
+}
+
+@media (max-width: 600px) {
+  .memory-heading-icon {
+    width: 28px;
+    height: 28px;
+    margin-left: 6px;
+  }
+}
+
+/* Compact Memory Chest cards on iPhone */
+
+@media (max-width: 600px) {
+  .memory-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .memory:not(.memory-open) {
+    min-height: 180px;
+    padding: 22px 16px;
+  }
+
+  .memory-gift-icon {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 10px;
+  }
+
+  .memory-heading {
+    font-size: clamp(18px, 5vw, 26px);
+    line-height: 1.5;
+  }
+
+  .memory-heading-icon {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+  }
+}
+
+/* ==================================================================
+   13  SECRET ENVELOPE / LEVEL 04
+   ================================================================== */
+/* Level 04 - Floating pixel envelope */
+
+.secret-envelope-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 30px;
+}
+
+.secret-envelope {
+  display: block;
+  width: 125px;
+  height: 125px;
+  object-fit: contain;
+  image-rendering: pixelated;
+
+  animation: envelopeFloat 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 8px 8px rgba(30, 15, 50, 0.25));
+}
+
+@keyframes envelopeFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .secret-envelope-wrapper {
+    margin: 15px auto 22px;
+  }
+
+  .secret-envelope {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .secret-envelope {
+    animation: none;
+  }
+}
+
+/* ==================================================================
+   14  FINAL IPHONE AVATAR ADJUSTMENT
+   ================================================================== */
+/* Make Aathi as tall as the cake on iPhone */
+@media (max-width: 600px) {
+  .birthday-layout:not(.wish-mode) .birthday-avatar-scene {
+    width: 140px;
+    flex-shrink: 0;
+  }
+
+  .birthday-layout:not(.wish-mode) .birthday-character {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
+  }
+
+  .birthday-layout:not(.wish-mode) {
+    gap: 0;
+    align-items: flex-end;
+    justify-content: center;
+  }
+}
+
+/* ==================================================================
+   15  PINK HUD HEARTS
+   ================================================================== */
+/* Pink hearts on all devices, including iPhone */
+
+.game-hearts {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.game-hearts span {
+  color: #ff8fc7 !important;
+  font-size: 24px;
+  font-family: Arial, sans-serif;
+  line-height: 1;
+  -webkit-text-fill-color: #ff8fc7;
+}
