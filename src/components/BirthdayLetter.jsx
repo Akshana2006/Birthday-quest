@@ -68,7 +68,7 @@ export default function BirthdayLetter({
         <p>
           With lots of love,
           <br />
-          Your big sister 💗
+          Akka 💗
         </p>
       </div>
 
